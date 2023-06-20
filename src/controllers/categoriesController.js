@@ -61,3 +61,14 @@ export const editCategorie = (request, response) => {
         response.redirect("/admin/categories");
     })
 }
+
+export const updateCategorie = (request, response) => {
+    let id = request.body.id;
+    let title = request.body.title;
+
+    Category.update({title : title, slug: slugify(title)}, {
+        where: { id:id }
+    }).then(() => {
+        response.redirect("/admin/categories");
+    })
+}

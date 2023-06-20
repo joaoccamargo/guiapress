@@ -9,7 +9,8 @@ import {
         editCategorie,
         listCategories,
         newCategorie, 
-        saveCategorie } from "./controllers/categoriesController.js";
+        saveCategorie, 
+        updateCategorie} from "./controllers/categoriesController.js";
         
 import { 
         listArticles,
@@ -44,7 +45,7 @@ app.get("/admin/categories/new", newCategorie);
 app.post("/categories/save", saveCategorie);
 app.post("/categories/delete", deleteCategorie);
 app.get("/admin/categories/edit/:id", editCategorie)
-app.post("/categories/update", )
+app.post("/categories/update", updateCategorie)
 
 /* EndPoints Articles */
 
