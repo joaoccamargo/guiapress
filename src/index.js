@@ -1,11 +1,12 @@
 import express from "express";
 import connection from "./database/database.js";
-
+/*SYNC SEQUELIZE
 import { Article } from "./models/Article.js"
 import { Category } from "./models/Category.js";
-
+*/
 import { 
-    deleteCategorie,
+        deleteCategorie,
+        editCategorie,
         listCategories,
         newCategorie, 
         saveCategorie } from "./controllers/categoriesController.js";
@@ -38,10 +39,12 @@ connection
 app.get("/", (req, res) => { res.send({ hello: "helloapi"}) })
 
 /* EndPoints Categories */
-app.get("/admin/categories", listCategories)
+app.get("/admin/categories", listCategories);
 app.get("/admin/categories/new", newCategorie);
 app.post("/categories/save", saveCategorie);
-app.post("/categories/delete", deleteCategorie)
+app.post("/categories/delete", deleteCategorie);
+app.get("/admin/categories/edit/:id", editCategorie)
+app.post("/categories/update", )
 
 /* EndPoints Articles */
 

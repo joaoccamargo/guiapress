@@ -44,3 +44,20 @@ export const deleteCategorie = (request, response) => {
     }
 };
 
+export const editCategorie = (request, response) => {
+    let id = request.params.id;
+
+    if(isNaN(id)){
+        response.redirect("/admin/categories");
+    }
+
+    Category.findByPk(id).then(category => {
+        if (category != undefined) {
+          response.render("admin/categories/edit", { category: category });
+        } else {
+          response.redirect("/admin/categories");
+        }
+    }).catch(error => {
+        response.redirect("/admin/categories");
+    })
+}
