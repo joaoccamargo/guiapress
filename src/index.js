@@ -5,6 +5,7 @@ import { Article } from "./models/Article.js"
 import { Category } from "./models/Category.js";
 
 import { 
+    deleteCategorie,
         listCategories,
         newCategorie, 
         saveCategorie } from "./controllers/categoriesController.js";
@@ -34,12 +35,13 @@ connection
     })
 
 
-app.get("/", (req, res) => { res.send("Hello API") })
+app.get("/", (req, res) => { res.send({ hello: "helloapi"}) })
 
 /* EndPoints Categories */
 app.get("/admin/categories", listCategories)
 app.get("/admin/categories/new", newCategorie);
 app.post("/categories/save", saveCategorie);
+app.post("/categories/delete", deleteCategorie)
 
 /* EndPoints Articles */
 

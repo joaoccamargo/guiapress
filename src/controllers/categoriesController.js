@@ -27,3 +27,20 @@ export const saveCategorie = (request, response) => {
   }
 };
 
+export const deleteCategorie = (request, response) => {
+    let id = request.body.id;
+    if(id != undefined && !isNaN(id)){
+
+        Category.destroy({
+            where: {
+                id: id
+            }
+        }).then(() => {
+            response.redirect("/admin/categories");
+        })
+
+    }else{
+       response.redirect("/admin/categories"); 
+    }
+};
+

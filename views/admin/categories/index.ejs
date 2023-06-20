@@ -4,6 +4,7 @@
 <div class="container">
     
     <h2>Categorias</h2>
+    <a class="btn btn-success" href="/admin/categories/new">Nova Categoria</a>
     <hr>
     <table class="table table-bordered">
         <thead>
@@ -20,7 +21,14 @@
                     <th><%= category.id %></th>
                     <th><%= category.title %></th>
                     <th><%= category.slug %></th>
-                    <th></th>
+                    <th>
+                        <button class="btn btn-warning">Editar</button>
+
+                        <form method="post" action="/categories/delete" style="display: inline;" onsubmit="confirmarDelecao(event, this)">
+                            <input type="hidden" name="id" value="<%= category.id %>">
+                            <button class="btn btn-danger">Deletar</button>
+                        </form>
+                    </th>
                 </tr>
             <%  }) %>
         </tbody>
@@ -30,3 +38,14 @@
 </div>
 
 <%- include('../../partials/footer') %>
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        let resposta = confirm("Tem certeza que deseja deleta essa categoria?");
+        if(resposta){
+            event.target.submit()
+        }else{
+            console.log("Não foi possivel enviar o formulário, você precisa aceita-lo")
+        }
+    }
+</script>
