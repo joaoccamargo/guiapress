@@ -5,7 +5,10 @@ import { Article } from "./models/Article.js"
 import { Category } from "./models/Category.js";
 
 import { 
-        newCategorie } from "./controllers/categoriesController.js";
+        listCategories,
+        newCategorie, 
+        saveCategorie } from "./controllers/categoriesController.js";
+        
 import { 
         listArticles,
         newArticle  } from "./controllers/articlesController.js";
@@ -30,12 +33,16 @@ connection
         console.log(error);
     })
 
+
+app.get("/", (req, res) => { res.send("Hello API") })
+
 /* EndPoints Categories */
+app.get("/admin/categories", listCategories)
 app.get("/admin/categories/new", newCategorie);
+app.post("/categories/save", saveCategorie);
 
 /* EndPoints Articles */
-app.get("/articles", listArticles)
-app.get("/admin/articles/new", newArticle)
+
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
