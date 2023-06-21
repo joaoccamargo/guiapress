@@ -12,10 +12,12 @@ import {
         updateCategorie} from "./controllers/categoriesController.js";
         
 import { 
-    deleteArticle,
+        deleteArticle,
+        editArticle,
         listArticles,
         newArticle,  
-        saveArticle} from "./controllers/articlesController.js";
+        saveArticle,
+        updateArticle} from "./controllers/articlesController.js";
 
 const app = express();
 // View Engine
@@ -103,6 +105,8 @@ app.get("/admin/articles", listArticles);
 app.get("/admin/articles/new", newArticle);
 app.post("/articles/save", saveArticle);
 app.post("/articles/delete", deleteArticle);
+app.get("/admin/articles/edit/:id", editArticle);
+app.post("/articles/update", updateArticle);
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")

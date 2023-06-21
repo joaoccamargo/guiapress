@@ -45,3 +45,40 @@ export const deleteArticle = (request, response) => {
     response.redirect("/admin/articles");
   }
 };
+
+export const editArticle = (request, response) => {
+  let id = request.params.id;
+
+  Article.findByPk(id).then(article => {
+    if(article != undefined){
+
+      Category.findAll().then(categories => {
+        response.render("admin/articles/edit", {article: article, categories:categories});
+
+      })
+    }else{
+      response.redirect("/");
+    }
+  }).catch(error => {
+    response.redirect("/");
+  })
+};
+
+
+export const updateArticle = (request, response) => {
+  let id = request.body.id;
+  let title = request.body.title;
+  let body = request.body.body;
+  let category = request.body.category;
+
+  Article.update(
+    { title: title, body: body, categoryId:category, slug:slugify(title) },
+    {
+      where: { id: id },
+    }
+  ).then(() => {
+    response.redirect("/admin/articles");
+  }).catch(error => {
+    response.redirect("/");
+  })
+};
