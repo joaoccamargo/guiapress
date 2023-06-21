@@ -2,6 +2,7 @@ import express from "express";
 import connection from "./database/database.js";
 import { Article } from "./models/Article.js"
 import { Category } from "./models/Category.js";
+//import { User } from "./models/User.js";
 
 import { 
         deleteCategorie,
@@ -108,6 +109,9 @@ app.post("/articles/delete", deleteArticle);
 app.get("/admin/articles/edit/:id", editArticle);
 app.post("/articles/update", updateArticle);
 app.get("/articles/page/:num", pageArticle)
+
+/* EndPoints Users */
+
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
