@@ -55,14 +55,14 @@ app.get("/", (req, res) => {
 //FindBySlug
 app.get("/:slug", (req,res) => {
     let slug = req.params.slug;
-    Article.findOne({
+    Article.findAll({
         where: {
             slug:slug
         }
     }).then(article => {
         if(article != undefined){
             Category.findAll().then((categories) => {
-              res.render("index", { article: article, categories: categories });
+              res.render("index", { articles: article, categories: categories });
             });
         }else{
             res.redirect("/")
