@@ -16,6 +16,7 @@ import {
         editArticle,
         listArticles,
         newArticle,  
+        pageArticle,  
         saveArticle,
         updateArticle} from "./controllers/articlesController.js";
 
@@ -107,6 +108,7 @@ app.post("/articles/save", saveArticle);
 app.post("/articles/delete", deleteArticle);
 app.get("/admin/articles/edit/:id", editArticle);
 app.post("/articles/update", updateArticle);
+app.get("/articles/page/:num", pageArticle)
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
