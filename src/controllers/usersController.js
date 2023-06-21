@@ -16,5 +16,13 @@ export const saveUser = (request, response) => {
     let salt = bcrypt.genSaltSync(10);
     let hash = bcrypt.hashSync(password, salt);
 
-    response.json({email, password})
+    User.create({
+        email:email,
+        password:hash
+    }).then(() => {
+        response.redirect("/");
+    }).catch((error) => {
+        response.redirect("/");
+    })
+
 };
