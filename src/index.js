@@ -20,6 +20,10 @@ import {
         pageArticle,  
         saveArticle,
         updateArticle} from "./controllers/articlesController.js";
+import { 
+        createUser,
+        listUsers,
+        saveUser} from "./controllers/usersController.js";
 
 const app = express();
 // View Engine
@@ -111,7 +115,9 @@ app.post("/articles/update", updateArticle);
 app.get("/articles/page/:num", pageArticle)
 
 /* EndPoints Users */
-
+app.get("/admin/users", listUsers);
+app.get("/admin/users/create", createUser);
+app.post("/users/create", saveUser)
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
