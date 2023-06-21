@@ -13,6 +13,7 @@ import {
         updateCategorie} from "./controllers/categoriesController.js";
         
 import { 
+    deleteArticle,
         listArticles,
         newArticle,  
         saveArticle} from "./controllers/articlesController.js";
@@ -52,6 +53,7 @@ app.post("/categories/update", updateCategorie);
 app.get("/admin/articles", listArticles);
 app.get("/admin/articles/new", newArticle);
 app.post("/articles/save", saveArticle);
+app.post("/articles/delete", deleteArticle);
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
