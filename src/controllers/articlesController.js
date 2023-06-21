@@ -91,26 +91,31 @@ export const pageArticle = (request, response) => {
   if(isNaN(page) || page == 1){
     offset = 0;
   }else{
-    offset = parseInt(page) * 4;
+    offset = (parseInt(page) -1) * 4;
   }
 
   Article.findAndCountAll({
     limit: 4,
-    offset: offset
-  }).then(articles => {
-
-    let next;
-    if(offset + 4 >= articles.count){
-      next = false;
-    }else{
-      next = true;
-    }
-
-    let result = {next:next,articles:articles}
-
-    Category.findAll().then(categories => {
-      response.render("admin/articles/page", {result: result, categories:categories})
-    })
-
+    offset: offset,
+    order: [["id", "DESC"]],
   })
+    .then((articles) => {
+      let next;
+      if (offset + 4 >= articles.count) {
+        next = false;
+      } else {
+        next = true;
+      }
+
+      let result = { page: parseInt(page), next: next, articles: articles };
+
+      Category.findAll().then((categories) => {
+        response.render("admin/articles/page", {
+          result: result,
+          categories: categories,
+        });
+      });
+    }).catch((error) => {
+      response.redirect("/");
+    });
 }

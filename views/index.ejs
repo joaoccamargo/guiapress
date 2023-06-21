@@ -5,9 +5,9 @@
         
         <hr>
         <div class="jumbotron">
-        <h1 class="display-4">Bem vindo(a), GuiaPress</h1>
-        <p class="lead">Esse é um blog, escolha os artigos...</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Leia mais</a>
+        <h1 class="display-4">Bem vindo(a)</h1>
+        <p class="lead">Esse é um blog, veja os artigos recentes!</p>
+        <a class="btn btn-primary btn-lg" href="/articles/page/2" role="button">Leia mais</a>
         </div>
         <hr>
         <% articles.forEach(article => { %>
@@ -21,6 +21,12 @@
             </div>
 
         <% })  %>
+        <div class="row">
+            <div class="col col-12">
+                <a style="float: right;" href="/articles/page/2">Next >>></a>
+            </div>
+            <hr>
+        </div>
 
     </div>
 </body>
