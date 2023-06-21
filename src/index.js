@@ -14,7 +14,8 @@ import {
         
 import { 
         listArticles,
-        newArticle  } from "./controllers/articlesController.js";
+        newArticle,  
+        saveArticle} from "./controllers/articlesController.js";
 
 const app = express();
 // View Engine
@@ -44,11 +45,13 @@ app.get("/admin/categories", listCategories);
 app.get("/admin/categories/new", newCategorie);
 app.post("/categories/save", saveCategorie);
 app.post("/categories/delete", deleteCategorie);
-app.get("/admin/categories/edit/:id", editCategorie)
-app.post("/categories/update", updateCategorie)
+app.get("/admin/categories/edit/:id", editCategorie);
+app.post("/categories/update", updateCategorie);
 
 /* EndPoints Articles */
-
+app.get("/admin/articles", listArticles);
+app.get("/admin/articles/new", newArticle);
+app.post("/articles/save", saveArticle);
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
