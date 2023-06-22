@@ -3,6 +3,7 @@ import connection from "./database/database.js";
 import { Article } from "./models/Article.js"
 import { Category } from "./models/Category.js";
 //import { User } from "./models/User.js";
+import session from "express-session";
 
 import { 
         deleteCategorie,
@@ -26,6 +27,12 @@ import {
         saveUser} from "./controllers/usersController.js";
 
 const app = express();
+
+// Session, expires 30 second(s)
+app.use(session({
+    secret: "qualquertextoparaaumentarsegurança", cookie: {maxAge: 30000}
+}))
+
 // View Engine
 app.set('view engine', 'ejs')
 
