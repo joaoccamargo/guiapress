@@ -26,13 +26,18 @@ import {
         listUsers,
         saveUser,
         userAuthenticate,
-        userLogin} from "./controllers/usersController.js";
+        userLogin,
+        userLogout} from "./controllers/usersController.js";
+import { adminAuth } from "./middlewares/adminAuth.js";
 
 const app = express();
 
 // Session, expires 30 second(s)
 app.use(session({
-    secret: "qualquertextoparaaumentarsegurança", cookie: {maxAge: 30000}
+    secret: "qualquertextoparaaumentarsegurança", 
+    cookie: {maxAge: 30000},
+    resave: false,
+    saveUninitialized: false
 }))
 
 // View Engine
@@ -107,28 +112,29 @@ app.get("/category/:slug", (req, res) => {
 })
 
 /* EndPoints Categories */
-app.get("/admin/categories", listCategories);
-app.get("/admin/categories/new", newCategorie);
-app.post("/categories/save", saveCategorie);
-app.post("/categories/delete", deleteCategorie);
-app.get("/admin/categories/edit/:id", editCategorie);
-app.post("/categories/update", updateCategorie);
+app.get("/admin/categories", adminAuth, listCategories);
+app.get("/admin/categories/new", adminAuth, newCategorie);
+app.post("/categories/save", adminAuth, saveCategorie);
+app.post("/categories/delete", adminAuth, deleteCategorie);
+app.get("/admin/categories/edit/:id", adminAuth, editCategorie);
+app.post("/categories/update", adminAuth, updateCategorie);
 
 /* EndPoints Articles */
-app.get("/admin/articles", listArticles);
-app.get("/admin/articles/new", newArticle);
-app.post("/articles/save", saveArticle);
-app.post("/articles/delete", deleteArticle);
-app.get("/admin/articles/edit/:id", editArticle);
-app.post("/articles/update", updateArticle);
+app.get("/admin/articles", adminAuth, listArticles);
+app.get("/admin/articles/new", adminAuth, newArticle);
+app.post("/articles/save", adminAuth, saveArticle);
+app.post("/articles/delete", adminAuth, deleteArticle);
+app.get("/admin/articles/edit/:id", adminAuth, editArticle);
+app.post("/articles/update", adminAuth, updateArticle);
 app.get("/articles/page/:num", pageArticle)
 
 /* EndPoints Users */
-app.get("/admin/users", listUsers);
-app.get("/admin/users/create", createUser);
-app.post("/users/create", saveUser)
-app.get("/users/login", userLogin)
-app.post("/users/authenticate", userAuthenticate)
+app.get("/admin/users", adminAuth, listUsers);
+app.get("/admin/users/create", adminAuth, createUser);
+app.post("/users/create", adminAuth, saveUser);
+app.get("/users/login", userLogin);
+app.post("/users/authenticate", userAuthenticate);
+app.get("/users/logout", userLogout);
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")
