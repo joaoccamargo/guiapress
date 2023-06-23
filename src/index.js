@@ -24,7 +24,9 @@ import {
 import { 
         createUser,
         listUsers,
-        saveUser} from "./controllers/usersController.js";
+        saveUser,
+        userAuthenticate,
+        userLogin} from "./controllers/usersController.js";
 
 const app = express();
 
@@ -125,6 +127,8 @@ app.get("/articles/page/:num", pageArticle)
 app.get("/admin/users", listUsers);
 app.get("/admin/users/create", createUser);
 app.post("/users/create", saveUser)
+app.get("/users/login", userLogin)
+app.post("/users/authenticate", userAuthenticate)
 
 app.listen(8080, () => {
     console.log("Servidor iniciado na porta 8080")

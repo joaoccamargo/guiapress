@@ -38,6 +38,32 @@ export const saveUser = (request, response) => {
         }
     })
 
-   
-
 };
+
+export const userLogin = (request, response) => {
+    response.render("admin/users/login")
+}
+
+export const userAuthenticate = (request, response) => {
+    let email = request.body.email;
+    let password = request.body.password;
+
+    User.findOne({where:{email:email}}).then(user => {
+        if(user != undefined){ // Se existir usuario com email informado.
+            // Validar com bcrypt
+            let correct = bcrypt.compareSync(password, user.password);
+            
+            if(correct){
+                request.session.user = {
+                  id: user.id,
+                  email: user.email,
+                };
+                response.json(request.session.user);
+            }else{
+                response.redirect("/users/login");
+            }
+        }else{
+            response.redirect("/users/login");
+        }
+    })
+}
