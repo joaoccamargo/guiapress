@@ -58,7 +58,7 @@ export const userAuthenticate = (request, response) => {
                   id: user.id,
                   email: user.email,
                 };
-                response.json(request.session.user);
+                response.redirect("/admin/users")
             }else{
                 response.redirect("/users/login");
             }
@@ -66,4 +66,9 @@ export const userAuthenticate = (request, response) => {
             response.redirect("/users/login");
         }
     })
+}
+
+export const userLogout = (request, response) => {
+    request.session.user = undefined;
+    response.redirect("/");
 }
